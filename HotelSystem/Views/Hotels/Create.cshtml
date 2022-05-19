@@ -1,0 +1,141 @@
+﻿@model HotelSystem.Models.Hotels
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<section class="ad-post bg-gray py-5">
+    <div class="container">
+        @using (Html.BeginForm(actionName: "Create", controllerName: "Hotels", routeValues: null, method: FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <fieldset class="border border-gary p-4 mb-5">
+                <div class="row">
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+ 
+                    <div class="col-lg-6">
+                        <h6 class="font-weight-bold pt-4 pb-1">Hotel Name:</h6>
+                        @Html.TextBoxFor(model => model.HotelName, new { @class = "border w-100 p-2 bg-white text-capitalize", @placeholder = "Hotel Name" })
+                        @Html.ValidationMessageFor(model => model.HotelName, "", new { @class = "text-danger" })
+
+                    <h6 class="font-weight-bold pt-4 pb-1">Number Of Floors:</h6>
+                        @Html.TextBoxFor(model => model.NoOfFloors, new { @class = "border w-100 p-2 bg-white text-capitalize", @placeholder = "Number Of Floors" })
+                        @Html.ValidationMessageFor(model => model.NoOfFloors, "", new { @class = "text-danger" })
+
+                    <h6 class="font-weight-bold pt-4 pb-1">Total Rooms:</h6>
+                        @Html.TextBoxFor(model => model.TotalNumberOfRooms, new { @class = "border w-100 p-2 bg-white text-capitalize", @placeholder = "Total Number Of Rooms" })
+                        @Html.ValidationMessageFor(model => model.TotalNumberOfRooms, "", new { @class = "text-danger" })
+
+                    <h6 class="font-weight-bold pt-4 pb-1">Hotel Address:</h6>
+                        @Html.TextBoxFor(model => model.Address, new { @class = "border w-100 p-2 bg-white text-capitalize", @placeholder = "Hotel Address" })
+                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+
+                        <input type="submit" value="Add Hotel" class="btn btn-outline-primary d-block mt-2" />
+                    </div>
+                    <div class="col-lg-6">
+                        <h6 class="font-weight-bold pt-4 pb-1">Description:</h6>
+                        @Html.TextAreaFor(model => model.HotelDescription, new { @class = "border p-3 w-100", @placeholder = "Write details about your hotel" })
+                        @Html.ValidationMessageFor(model => model.HotelDescription, "", new { @class = "text-danger" })
+
+                        <div class="choose-file text-center my-4 py-4 rounded">
+                            <label for="file-upload">
+                                <span class="d-block btn bg-primary text-white my-3 select-files">Select files</span>
+                                <input type="file" name="img_upload" accept=".jpeg,.jpg,.png" onchange="readURL(this);" id="file-upload" class="form-control-file d-none" required="required" />
+                            </label>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </fieldset>
+        }
+    </div>
+</section>
+
+
+@*<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+
+                @using (Html.BeginForm("Create", "Hotels", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><b style="color:#dd4b39; text-transform:capitalize;"><i class="fa fa-plus-square-o"></i> Add New Hotel.</b></h3>
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="container col-lg-6">
+
+                                @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.HotelName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Hotel Name*" } })
+                                    @Html.ValidationMessageFor(model => model.HotelName, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.NoOfFloors, new { htmlAttributes = new { @class = "form-control", @placeholder = "No Of Floors*" } })
+                                    @Html.ValidationMessageFor(model => model.NoOfFloors, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.TotalNumberOfRooms, new { htmlAttributes = new { @class = "form-control", @placeholder = "Total Number Of Rooms*" } })
+                                    @Html.ValidationMessageFor(model => model.TotalNumberOfRooms, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.HotelDescription, new { htmlAttributes = new { @class = "form-control", @placeholder = "Hotel Description*" } })
+                                    @Html.ValidationMessageFor(model => model.HotelDescription, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @placeholder = "Address*" } })
+                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <input type="file" class="form-control" id="photoUpload" name="photoUpload" required="required" />
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="photoUpload" data-valmsg-replace="true"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="submit" value="Create" class="btn btn-default" />
+                                </div>
+
+                            </div>
+                            <div class="container col-lg-6">
+                                <div class="col-md-6">
+                                    <img id="image_preview" src="#" alt="" />
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</section>*@
+
+<script type="text/javascript">
+    //image preview
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#image_preview')
+                    .attr('src', e.target.result)
+                    .width(350)
+                    .height(310);
+
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

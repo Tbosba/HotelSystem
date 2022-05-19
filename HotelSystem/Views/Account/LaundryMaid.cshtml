@@ -1,0 +1,96 @@
+﻿@model HotelBookingWebsite.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<section class="user-profile section">
+    <div class="container">
+        <div class="row">
+            <!--<div class="col-md-10 offset-md-1 col-lg-3 offset-lg-0">
+                <div class="sidebar">-->
+            <!-- User Widget -->
+            <!--<div class="widget user">-->
+            <!-- User Image -->
+            <!--<div class="image d-flex justify-content-center">
+                <img src="~/MainLayout/images/user/user-thumb.jpg" alt="" class="">
+            </div>-->
+            <!-- User Name -->
+            <!--<h5 class="text-center">Add your image</h5>
+                    </div>
+
+                </div>
+            </div>-->
+            <div class="col-md-10 offset-md-1 col-lg-12 offset-lg-0">
+                <!-- Edit Profile Welcome Text -->
+                <div class="widget welcome-message">
+                    <h2>Create profile</h2>
+                </div>
+                @using (Html.BeginForm("LaundryMaid", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <!-- Create Personal Info -->
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="widget personal-info">
+                                <h3 class="widget-header user">Personal Information</h3>
+                                @Html.ValidationSummary("", new { @class = "text-danger" })
+                                <!-- First Name -->
+                                <div class="form-group">
+                                    <label for="first-name">First Name</label>
+                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                </div>
+                                <!-- Last Name -->
+                                <div class="form-group">
+                                    <label for="last-name">Last Name</label>
+                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                                </div>
+                                <!-- Email -->
+                                <div class="form-group">
+                                    <label for="new-email">Email</label>
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Example@emailsample.com" })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+                                <!-- Address -->
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "Enter Valid Home Address" })
+                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <!-- Change Password -->
+                            <div class="widget change-password">
+                                <h3 class="widget-header user">Contact and Password</h3>
+                                <!-- Contact Number -->
+                                <div class="form-group">
+                                    <label for="contact">Contact Number</label>
+                                    @Html.TextBoxFor(m => m.ContactNo, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
+                                </div>
+                                <!-- New Password -->
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "********" })
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                </div>
+                                <!-- Confirm New Password -->
+                                <div class="form-group">
+                                    <label for="confirm-password">Confirm Password</label>
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "********" })
+                                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                </div><br />
+                                <!-- Submit Button -->
+                                <input type="submit" value="Sign-Up" class="btn btn-transparent" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

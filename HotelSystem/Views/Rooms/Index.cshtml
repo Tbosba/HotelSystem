@@ -1,0 +1,96 @@
+﻿@model IEnumerable<HotelSystem.Models.Rooms>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Rooms</h2>
+
+<a class="btn btn-default" href="@Url.Action("Create","Rooms")">
+    <i class="fa fa-plus"></i>
+    Add New Room
+</a>
+<table class="table table-hover table-striped table-responsive" id="my_list">
+    <thead>
+        <tr class="table-header-row">
+            <th>
+                @Html.DisplayNameFor(model => model.roomTypes.Type)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.RoomCapacity)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Adult)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Children)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.roomDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomPicture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomPrice)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.roomTypes.Type)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.RoomCapacity)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Adult)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Children)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.roomDescription)
+            </td>
+            <td>
+                <a><img src="data:image/png;base64,@Convert.ToBase64String(item.RoomPicture, 0, item.RoomPicture.Length)" style="width: 40px; height: 40px" alt="" /></a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomPrice)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.RoomId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.RoomId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.RoomId })
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<script type="text/javascript">
+    $('#my_list').dataTable(
+        {
+            dom: 'Bfrtip',
+            lengthMenu: [
+                [10, 25, 50, -1],
+                ['10 rows', '25 rows', '50 rows', 'Show all']
+            ],
+            buttons: [
+                'pageLength', 'csv', 'pdf', 'print'
+            ],
+            language: { search: "" },
+            select: true
+        }
+    );
+    $(".dataTables_filter input").addClass("search-input");
+    $(".dataTables_filter input").attr('placeholder', 'Search');
+    $('#my_list')
+        .removeClass('display')
+        .addClass('table table-striped table-hover');</script>
+

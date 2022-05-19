@@ -1,0 +1,114 @@
+﻿@model HotelSystem.Models.Booking
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<head>
+    <title></title>
+    <link href="~/font-awesome-4.6.3/font-awesome-4.6.3/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/font-awesome-4.6.3/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<section class="ad-post bg-gray py-5">
+    <div class="container col-md-12">
+        <fieldset class="border border-gary p-4 mb-5">
+            <div class="row">
+                <div class="col-md-12">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <h3 class="alert alert-info">Are you sure you want to cancel this booking?</h3>
+                        <div class="panel panel-body panel-danger" style="height: 400px">
+                            <div class="row">
+                                <div class="container col-md-6">
+
+                                    <div class="box box-default">
+                                        <h3 class="alert alert-info"><b style="color:#dd4b39">Cancel Booking</b></h3>
+
+                                        <hr />
+                                        <h2>Terms And Condition</h2><hr />
+                                        <br />
+                                        Bookings can be amended/cancelled until payment has been taken.
+                                        <br />
+                                        After payment has been taken bookings can be cancelled untill the day of arrival subject to a 5% charge (5% of total stay)
+                                        <br />
+                                        On the day of arrival bookings cannot be amended or cancelled and will be charged in full.
+                                        <br />
+                                              <p class="alert alert-warning"> By clicking here <i class="fa fa-level-down"></i> you accept out Term and Conditions.</p>
+                                        <hr />
+                                        <div class="box-footer">
+                                            <input type="submit" value="Accept Terms And Condition" class="btn btn-outline-primary" /> | <a class="btn btn-outline-info" href="@Url.Action("Index","Bookings")"><i class="fa fa-arrow-left"></i> Back</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="container col-md-6">
+
+                                        @{
+                                            decimal fee = Model.Total * 0.05m;
+                                        }
+                                        <h3 class="alert alert-info">Cancellation fee <b style="color:indianred"> @fee.ToString("R 0.00")</b></h3><hr />
+                                        <h3 style="color:indianred">Booking Details</h3><hr />
+                                            <dl class="dl-horizontal">
+                                                <div class="col-md-12">
+                                                    <div>
+                                                        Name
+
+                                                        <span class="pull-right"><b> @Model.Name </b></span>
+                                                    </div>
+                                                    <div>
+                                                        Surname
+
+                                                        <span class="pull-right"><b>@Model.Surname </b></span>
+                                                    </div>
+                                                    <div>
+                                                        Contact Number
+
+                                                        <span class="pull-right"><b> @Model.Mobile </b></span>
+                                                    </div>
+                                                    <div>
+                                                        Email
+
+                                                        <span class="pull-right"><b> @Model.GuestEmail </b></span>
+                                                    </div>
+                                                    <hr />
+                                                    <div>
+                                                        Ref. Number
+
+                                                        <span class="pull-right"><b> @Model.RefNum </b></span>
+                                                    </div>
+                                                    <div>
+                                                        Check In Date
+
+                                                        <span class="pull-right"><b> @Model.CheckInDate </b></span>
+                                                    </div>
+                                                    <div>
+                                                        Check Out Date
+
+                                                        <span class="pull-right"><b>@Model.CheckOutDate </b></span>
+                                                    </div>
+                                                    <div>
+                                                        Room Type
+
+                                                        <span class="pull-right"><b> @Model.RoomType </b></span>
+                                                    </div>
+                                                    <div>
+                                                        Total
+
+                                                        <span class="pull-right"><b> @Model.Total.ToString("R 0.00") </b></span>
+                                                    </div>
+                                                    <div>
+                                                        Status
+
+                                                        <span class="pull-right"><b> @Model.Status </b></span>
+                                                    </div>
+                                                </div>
+                                            </dl>
+                                    </div>
+                                </div>
+                        </div>
+                     }
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</section>

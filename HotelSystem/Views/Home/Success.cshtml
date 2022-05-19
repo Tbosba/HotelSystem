@@ -1,0 +1,17 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "title";
+
+   Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="jumbotron" style="text-align:center;background-color:dodgerblue;color:white">
+    <h1 style="font-family:'Buxton Sketch'"> Thank you for your comments and rating us.</h1>
+ 
+    <p>
+        <a href="@Url.Action("Index","Home")" class="btn btn-outline-warning"><i class="fa fa-send"></i> Exit Page</a>
+
+    </p>
+</div>
+

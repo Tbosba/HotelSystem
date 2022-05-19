@@ -1,0 +1,213 @@
+﻿@model HotelSystem.Models.Booking
+
+@{
+    ViewBag.Title = "Extend Stay";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<section class="ad-post bg-gray py-5">
+    <div class="container">
+        <fieldset class="border border-gary p-4 mb-5">
+            <div class="row">
+                <div class="col-md-12">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><b style="color:#dd4b39; text-transform:capitalize;"> Extend Stay Booking</b></h3>
+                            </div>
+                            <div class="panel-body">
+                                <br />
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.RoomBookingId)
+                                @Html.HiddenFor(model => model.Name)
+                                @Html.HiddenFor(model => model.Surname)
+                                @Html.HiddenFor(model => model.GuestEmail)
+                                @Html.HiddenFor(model => model.Mobile)
+                                @Html.HiddenFor(model => model.Status)
+                                @Html.HiddenFor(model => model.Total)
+                                @Html.HiddenFor(model => model.DepositAmt)
+                                @Html.HiddenFor(model => model.RoomPrice)
+                                @Html.HiddenFor(model => model.RoomType)
+                                @Html.HiddenFor(model => model.NumberOfDays)
+                                @Html.HiddenFor(model => model.NumberOfPeople)
+                                @Html.HiddenFor(model => model.RefNum)
+                                @Html.HiddenFor(model => model.Address)
+                                @Html.HiddenFor(model => model.HotelAddress)
+                                @Html.HiddenFor(model => model.Tax)
+                                @*@Html.HiddenFor(model => model.CheckInDate)
+                    @Html.HiddenFor(model => model.CheckOutDate)*@
+
+                                @*<div class="form-group">
+                        @Html.LabelFor(model => model.Room_Number, htmlAttributes: new { @class = "control-label" })
+
+                        @Html.TextBoxFor(model => model.Room_Number, new { @class = "form-control", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(model => model.Room_Number, "", new { @class = "text-danger" })
+
+                    </div>*@
+
+                                @*<div class="form-group">
+                        @Html.LabelFor(model => model.CheckInDate, htmlAttributes: new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.CheckInDate, new { @class = "form-control", @required = "required", @readonly = "readonly", Value = TempData["CheckInDate"] })
+                        @Html.ValidationMessageFor(model => model.CheckInDate, "", new { @class = "text-danger" })
+
+                    </div>*@
+
+                                <div class="form-group col-lg-6">
+                                    @Html.Label("Current check-in date")
+                                    @Html.TextBox("TT", null, new { @class = "form-control", @readonly = "readonly", Value = Model.CheckInDate.ToShortDateString() })
+                                    @Html.Label("New check-in date")
+                                    @Html.EditorFor(model => model.CheckInDate, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.CheckInDate, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group col-lg-6">
+                                    @Html.Label("Current check-out date")
+                                    @Html.TextBox("TT", null, new { @class = "form-control", @readonly = "readonly", Value = Model.CheckOutDate.ToShortDateString() })
+                                    @Html.Label("New check-out date")
+                                    @Html.EditorFor(model => model.CheckOutDate, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.CheckOutDate, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group col-lg-6">
+                                    <input type="submit" value="Extend Stay" class="btn btn-outline-primary" /> | @Html.ActionLink("Cancel", "Index")
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</section>
+@*<div class="col-md-12">
+
+        <div class="panel panel-body panel-danger" style="background-color:lightgrey">
+            <div class="box-default">
+                @using (Html.BeginForm("Edit", "Bookings", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <h3><b style="color:#dd4b39">Conference Booking Portal</b></h3>
+                    <div class="container">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+
+                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control", Value = TempData["Name"], @readonly = "readonly", @required = "required" })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.Surname, htmlAttributes: new { @class = "control-label" })
+
+                            @Html.TextBoxFor(model => model.Surname, new { @class = "form-control", Value = TempData["Surname"], @readonly = "readonly", @required = "required" })
+                            @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.GuestEmail, htmlAttributes: new { @class = "control-label" })
+
+                            @Html.TextBoxFor(model => model.GuestEmail, new { @class = "form-control", Value = TempData["GuestEmail"], @readonly = "readonly", @required = "required" })
+                            @Html.ValidationMessageFor(model => model.GuestEmail, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.Mobile, htmlAttributes: new { @class = "control-label" })
+
+                            @Html.TextBoxFor(model => model.Mobile, new { @class = "form-control", Value = TempData["Mobile"], @readonly = "readonly", @required = "required" })
+                            @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.RefNum, htmlAttributes: new { @class = "control-label" })
+
+                            @Html.TextBoxFor(model => model.RefNum, new { @class = "form-control", Value = TempData["RefNum"], @readonly = "readonly", @required = "required" })
+                            @Html.ValidationMessageFor(model => model.RefNum, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.RoomType, htmlAttributes: new { @class = "control-label" })
+
+                            @Html.TextBoxFor(model => model.RoomType, new { @class = "form-control", Value = TempData["RoomType"], @readonly = "readonly", @required = "required" })
+                            @Html.ValidationMessageFor(model => model.RoomType, "", new { @class = "text-danger" })
+
+                        </div>
+
+
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.NumberOfDays, htmlAttributes: new { @class = "control-label" })
+
+                            @Html.TextBoxFor(model => model.NumberOfDays, new { @class = "form-control", Value = TempData["NumberOfDays"], @readonly = "readonly", @required = "required" })
+                            @Html.ValidationMessageFor(model => model.NumberOfDays, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.NumberOfPeople, htmlAttributes: new { @class = "control-label" })
+
+                            @Html.TextBoxFor(model => model.NumberOfPeople, new { @class = "form-control", Value = TempData["NumberOfPeople"], @readonly = "readonly", @required = "required" })
+                            @Html.ValidationMessageFor(model => model.NumberOfPeople, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.RoomPrice, htmlAttributes: new { @class = "control-label", @required = "required" })
+
+                            @Html.TextBoxFor(model => model.RoomPrice, new { @class = "form-control", @required = "required", @readonly = "readonly", Value = TempData["RoomPrice"] })
+                            @Html.ValidationMessageFor(model => model.RoomPrice, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "control-label", @required = "required" })
+
+                            @Html.TextBoxFor(model => model.Total, new { @class = "form-control", Value = TempData["amount"], @readonly = "readonly", @required = "required" })
+                            @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.CheckInDate, htmlAttributes: new { @class = "control-label", @required = "required" })
+
+                            @Html.TextBoxFor(model => model.CheckInDate, new { @class = "form-control", @required = "required", @readonly = "readonly", Value = TempData["CheckInDate"] })
+                            @Html.ValidationMessageFor(model => model.CheckInDate, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.CheckOutDate, htmlAttributes: new { @class = "control-label", @required = "required" })
+
+                            @Html.TextBoxFor(model => model.CheckOutDate, new { @class = "form-control", @required = "required", @readonly = "readonly", Value = TempData["CheckOutDate"] })
+                            @Html.ValidationMessageFor(model => model.CheckOutDate, "", new { @class = "text-danger" })
+
+                        </div>
+                        <hr />
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.CheckInDate, htmlAttributes: new { @class = "control-label", @required = "required" })
+
+                            @Html.EditorFor(model => model.CheckInDate, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CheckInDate, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.CheckOutDate, htmlAttributes: new { @class = "control-label", @required = "required" })
+
+                            @Html.EditorFor(model => model.CheckOutDate, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CheckOutDate, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="form-group col-lg-6">
+
+                            <input type="submit" value="Extend Stay" class="btn btn-default" /> |
+                            <a class="btn btn-default" href="@Url.Action("Index","Home")"> Back to Home</a>
+
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>*@

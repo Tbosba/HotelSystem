@@ -1,0 +1,82 @@
+﻿@model HotelSystem.Models.Booking
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    var message = TempData["AlertMessage"] ?? string.Empty;
+
+    TempData.Keep("DateIn");
+    TempData.Keep("DateOut");
+    TempData.Keep("userID");
+}
+<script>
+    var msg = '@message';
+    if (msg)
+        alert(msg);
+</script>
+<section class="ad-post bg-gray py-5">
+    <div class="container">
+        <fieldset class="border border-gary p-4 mb-5">
+            <div class="row">
+                <div class="col-md-12">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><b style="color:#dd4b39; text-transform:capitalize;">Booking Portal</b></h3>
+                            </div>
+                            <p style="color:black">
+                            Dear @TempData["userID"] welcome to Paramount Hotel. Please corfirm your details and continue with your booking.<br />
+                            Have enjoyable stay 
+                            </p>
+                            <div class="panel-body">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                <div class="row">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="container col-md-6">
+                                        <div class="form-group" style="display:none">
+                                            @Html.LabelFor(model => model.RoomId, "RoomId", htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                <input type="hidden" readonly value="@ViewBag.Id" class="form-control" name="RoomId" />
+                                                @Html.ValidationMessageFor(model => model.RoomId, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Check In Date</label>
+                                            @Html.EditorFor(model => model.CheckInDate, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.CheckInDate, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Check out Date</label>
+                                            @Html.EditorFor(model => model.CheckOutDate, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.CheckOutDate, "", new { @class = "text-danger" })
+                                        </div>
+
+                                    </div>
+                                    <div class="container col-md-6">
+
+                                        <div class="form-group">
+                                            <label> Guest Email</label>
+                                            @Html.TextBoxFor(model => model.GuestEmail, new { @class = "form-control", Value = TempData["userID"], @readonly = "readonly", @required = "required" })
+                                            @Html.ValidationMessageFor(model => model.GuestEmail, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input style="background-color:blue;color:white;" type="submit" value="Book" class="btn btn-success" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</section>

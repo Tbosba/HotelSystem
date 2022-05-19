@@ -1,0 +1,49 @@
+﻿@model IEnumerable<HotelSystem.Models.Hotels>
+
+@{
+    ViewBag.Title = "HotelView";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Hotel View</h2>
+
+<style>
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        max-width: 100% !important;
+        margin: auto;
+        text-align: center;
+        /*            height: 250px !important;*/
+        margin-bottom: 20px !important;
+        border: groove !important;
+    }
+
+        .card:hover {
+            border-radius: 10px;
+            border-color: aqua !important;
+        }
+</style>
+<h2 style="text-align:center; padding-bottom:20px !important">Available Hotels</h2>
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-8">
+                <div class="card">
+
+                    <img class="card-img-top" src="data:image/png;base64,@Convert.ToBase64String(item.HotelPic, 0, item.HotelPic.Length)" style="width: 290px; height: 150px" alt="" align="left">
+
+                    <div class="card-body" @*align="center"*@>
+                        <h4 class="card-title"> <strong> @Html.DisplayFor(x => item.HotelName)</strong> </h4>
+                        <p class="card-text">Number of floors :@Html.DisplayFor(modelItem => item.NoOfFloors)</p>
+                        <p class="card-text">Hotel Address :@Html.DisplayFor(modelItem => item.Address)</p>
+                        <p class="card-text">Room Description :@Html.DisplayFor(modelItem => item.HotelDescription)</p>
+                        <br />
+                        <p><a class="btn btn-default" onclick="location.href='@Url.Action("RoomBooking1","Rooms", new { id=item.HotelId})'">View Hotel </a></p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

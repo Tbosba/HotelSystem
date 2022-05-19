@@ -1,0 +1,103 @@
+﻿@model IEnumerable<HotelSystem.Models.Rooms>
+@{
+    ViewBag.Title = "Available rooms";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<section class="dashboard section">
+    <!-- Container Start -->
+    <div class="container">
+        <!-- Row Start -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="heading text-center pb-5">
+                    <h2 class="font-weight-bold">Best Price and Service Guaranteed</h2>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                @if (Model.Count() == 0)
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-warning">
+                                <b>Note :</b> No rooms available at the moment.
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <!-- Recently Favorited -->
+                    foreach (var item in Model)
+                    {
+
+                        <div class="widget dashboard-container my-adslist">
+                            @if (item.roomTypes.RoomAvailable > 5)
+                            {
+                                <h3 class="widget-header alert alert-success">#<b>@Html.DisplayFor(modelItem => item.roomTypes.RoomAvailable) @Html.DisplayFor(modelItem => item.roomTypes.Type)</b> rooms available at <b>@Html.DisplayFor(modelItem => item.hotels.HotelName)</b> Hotel at the moment</h3>
+                            }
+                            else if (item.roomTypes.RoomAvailable > 0 && item.roomTypes.RoomAvailable <= 5)
+                            {
+                                <h3 class="widget-header alert alert-warning">Hurry! #<b>@Html.DisplayFor(modelItem => item.roomTypes.RoomAvailable) @Html.DisplayFor(modelItem => item.roomTypes.Type)</b> rooms available at <b>@Html.DisplayFor(modelItem => item.hotels.HotelName)</b> Hotel at the moment</h3>
+                            }
+                            else if (item.roomTypes.RoomAvailable == 0)
+                            {
+                                <h3 class="widget-header alert alert-danger">Oops! #<b>@Html.DisplayFor(modelItem => item.roomTypes.RoomAvailable) @Html.DisplayFor(modelItem => item.roomTypes.Type)</b> rooms vailable at <b>@Html.DisplayFor(modelItem => item.hotels.HotelName)</b> Hotel at the moment</h3>
+                            }
+                            <table class="table table-responsive product-dashboard-table">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Room Details</th>
+                                        <th class="text-center">Hotel</th>
+                                        <th class="text-center">reserve Now</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="product-thumb">
+                                            <img src="data:image/png;base64,@Convert.ToBase64String(item.RoomPicture, 0, item.RoomPicture.Length)" class="rounded-circle" style="width: 80px; height: auto" alt="image description" />
+                                        </td>
+                                        <td class="product-details">
+                                            <h3 class="title">@Html.DisplayFor(modelItem => item.roomTypes.Type)</h3>
+                                            <div>
+                                                <strong>Children:</strong>@Html.DisplayFor(modelItem => item.Children)
+                                            </div> 
+                                            <div>
+                                                <strong>Adult: </strong><time>@Html.DisplayFor(modelItem => item.Adult)</time>
+                                            </div>
+                                            <div>
+                                                <strong>Price</strong> R @Html.DisplayFor(modelItem => item.RoomPrice)
+                                            </div>
+                                            <div style="width:400px">
+                                                <strong>Description</strong>@Html.DisplayFor(modelItem => item.roomDescription)
+                                            </div>
+                                            
+                                        </td>
+                                        <td class="product-category"><span class="categories">@Html.DisplayFor(modelItem => item.hotels.HotelName)</span></td>
+                                        <td class="action" data-title="Action">
+                                            <div class="">
+                                                <ul class="list-inline justify-content-center">
+                                                    <li class="list-inline-item">
+                                                        <a data-toggle="tooltip" data-placement="top" title="Make Reservation" class="edit" href="@Url.Action("Create","Bookings", new { id=item.RoomId })">
+                                                            <h2 style="font-size:15px; padding:10px 20px;font-weight:600; color:white; background-color:blue;">Make Reservation</h2>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    }
+                }
+
+            </div>
+        </div>
+    </div>
+</section>

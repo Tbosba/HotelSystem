@@ -1,0 +1,94 @@
+﻿@model HotelSystem.Models.Booking
+
+@{
+    ViewBag.Title = "CancelIndex";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<section class="ad-post bg-gray py-5">
+    <div class="container col-md-12">
+        <fieldset class="border border-gary p-4 mb-5">
+            <div class="row">
+                <div class="col-md-10">
+
+                    <div class="panel panel-body panel-danger" style="background-color:dodgerblue; color:white">
+                        <div class="row">
+                            <div class="container col-md-12">
+
+                                @{
+                                    decimal fee = Model.Total * 0.05m;
+                                }
+                                <h3 class="alert alert-info">Cancellation fee <b style="color:indianred"> @fee.ToString("R 0.00")</b></h3><hr />
+                                <h3 style="color:indianred">Booking Details</h3><hr />
+                                <dl class="dl-horizontal">
+                                    <div class="col-md-12">
+                                        <div>
+                                            Name
+
+                                            <span class="pull-right"><b> @Model.Name </b></span>
+                                        </div>
+                                        <div>
+                                            Surname
+
+                                            <span class="pull-right"><b>@Model.Surname </b></span>
+                                        </div>
+                                        <div>
+                                            Contact Number
+
+                                            <span class="pull-right"><b> @Model.Mobile </b></span>
+                                        </div>
+                                        <div>
+                                            Email
+
+                                            <span class="pull-right"><b> @Model.GuestEmail </b></span>
+                                        </div>
+                                        <hr />
+                                        <div>
+                                            Ref. Number
+
+                                            <span class="pull-right"><b> @Model.RefNum </b></span>
+                                        </div>
+                                        <div>
+                                            Check In Date
+
+                                            <span class="pull-right"><b> @Model.CheckInDate </b></span>
+                                        </div>
+                                        <div>
+                                            Check Out Date
+
+                                            <span class="pull-right"><b>@Model.CheckOutDate </b></span>
+                                        </div>
+                                        <div>
+                                            Room Type
+
+                                            <span class="pull-right"><b> @Model.RoomType </b></span>
+                                        </div>
+                                        <div>
+                                            Total
+
+                                            <span class="pull-right"><b> @Model.Total.ToString("R 0.00") </b></span>
+                                        </div>
+                                        <div>
+                                            Status
+
+                                            <span class="pull-right"><b> @Model.Status </b></span>
+                                        </div>
+                                    </div>
+                                </dl>
+
+                                @using (Html.BeginForm())
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <h3>Are you sure you want to cancel this booking?</h3>
+                                    <br />
+                                    <div class="form-actions no-color">
+                                        <input type="submit" value="Confirm Booking Cancellation" class="btn btn-default" /> | <a class="btn btn-default" href="@Url.Action("Index","Home")"> Back to Home</a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</section>

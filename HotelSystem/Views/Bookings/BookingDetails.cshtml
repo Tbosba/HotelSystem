@@ -1,0 +1,169 @@
+﻿@model HotelSystem.Models.Booking
+@{
+    ViewBag.Title = "BookingDetails";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    var Total = 0m;
+    var message = TempData["AlertMessage"] ?? string.Empty;
+}
+<script>
+    var msg = '@message';
+    if (msg)
+        alert(msg);
+</script>
+<section class="ad-post bg-gray py-5">
+    <div class="container col-md-12">
+        <fieldset class="border border-gary p-4 mb-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <section class="content-header alert alert-info">
+                        <h1>My Booking Details</h1>
+                        <ol class="breadcrumb">
+                            <li><a href="/home/index"><i class="fa fa-dashboard"></i> Home </a></li> &raquo;
+                            <li class="active"><a href="#"> My Bookings</a></li>
+                        </ol>
+                    </section>
+                    <hr />
+                    <!-- Main content -->
+                    <section class="content">
+                        <!-- Main row -->
+                        <div class="box box-default">
+
+                            <div class="box-header with-border">
+                                <h3 class="box-title alert alert-info"><i class="fa fa-user"> Guests Details</i></h3>
+                            </div>
+                            <hr />
+                            <div class="box-content">
+                                <div class="col-md-12">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div>
+                                                    Name
+
+                                                    <span class="pull-right"><b> @Model.Name </b></span>
+                                                </div><br />
+                                                <div>
+                                                    Surname
+
+                                                    <span class="pull-right"><b>@Model.Surname </b></span>
+                                                </div><br />
+                                                <div>
+                                                    Contact Number
+
+                                                    <span class="pull-right"><b> @Model.Mobile </b></span>
+                                                </div>
+                                                <br />
+                                                <div>
+                                                    Email
+
+                                                    <span class="pull-right"><b> @Model.GuestEmail </b></span>
+                                                </div><br />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><hr />
+                            <div class="box-header with-border">
+                                <h3 class="box-title alert alert-info"><i class="fa fa-book"> Booking Details</i></h3>
+                            </div><hr />
+                            <div class="box-content">
+                                <div class="col-md-12">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div>
+                                                    Reference Number
+
+                                                    <span class="pull-right"><b> @Model.RefNum </b></span>
+                                                </div><br />
+                                                <div>
+                                                    Check In
+
+                                                    <span class="pull-right"><b>@Model.CheckInDate </b></span>
+                                                </div><br />
+                                                <div>
+                                                    Check Out
+
+                                                    <span class="pull-right"><b> @Model.CheckOutDate </b></span>
+                                                </div>
+                                                <br />
+                                                <div>
+                                                    Number Of Days
+
+                                                    <span class="pull-right"><b> @Model.NumberOfDays </b></span>
+                                                </div>
+                                                <br />
+                                                <div>
+                                                    Booking Date
+
+                                                    <span class="pull-right"><b> @Model.BookingDate.ToString("dd MMMM yyyy") </b></span>
+                                                </div>
+                                                <br />
+                                                <div>
+                                                    Sub-total
+
+                                                    <span class="pull-right"><b> R @Model.BasicCost </b></span>
+                                                </div>
+                                                <br />
+                                                <div>
+                                                    Tax (15%)
+
+                                                    <span class="pull-right"><b> R @Model.Tax </b></span>
+                                                </div>
+                                                <br />
+                                                <div>
+                                                    Total Price
+
+                                                    <span class="pull-right"><b> R @Model.Total </b></span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        @*<div class="row">
+                                                <h5>Booked Rooms</h5>
+                                                <div class="col-md-12">
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th>Room</th>
+                                                            <th>Aduts</th>
+                                                            <th>Childrens</th>
+                                                            <th>Rooms</th>
+                                                            <th>Price</th>
+                                                        </tr>
+                                                        @foreach (var r in Model.RoomBookings)
+                                                        {
+                                                            <tr>
+                                                                <td>@r.Room.roomTypes.Type</td>
+                                                                <td>@r.Room.Adult</td>
+                                                                <td>@r.Room.Children    </td>
+                                                                <td>@r.NumberOfRooms</td>
+                                                                <td>@r.Room.RoomPrice</td>
+                                                            </tr>
+                                                        }
+                                                    </table>
+                                                </div>
+                                            </div>*@
+                                    </div>
+                                </div>
+                            </div><hr />
+                            <div class="box-footer">
+                                <a class="btn btn-outline-info col-md-3" href="/bookings/index">
+                                    <i class="fa fa-arrow-left"></i>
+                                    Back
+                                </a>
+                                @if (Model.CheckOut == false)
+                                {
+                                    <a class="btn btn-primary col-md-3 pull-right" href="/bookings/invoice/@Model.RoomBookingId">
+                                        <i class="fa fa-envelope-o"></i>
+                                        View invoice
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                        <!-- /.row (main row) -->
+                    </section>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</section>

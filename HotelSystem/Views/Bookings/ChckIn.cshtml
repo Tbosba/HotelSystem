@@ -1,0 +1,310 @@
+﻿@*@model IEnumerable<PrometheusHotel.Models.Booking>
+
+@{
+    ViewBag.Title = "ChckIn";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var message = TempData["AlertMessage"] ?? string.Empty;
+}
+<script>
+    var msg = '@message';
+    if (msg)
+        alert(msg);
+</script>
+
+<h2 align="center">Check-In</h2>
+<table class="table table-hover table-striped table-responsive" id="my_list">
+    <thead>
+        <tr class="table-header-row">
+
+            <th class="th-sm">
+                @Html.DisplayNameFor(model => model.RoomType)
+            </th>
+            <th class="th-sm">
+                @Html.DisplayNameFor(model => model.GuestEmail)
+            </th>
+            <th class="th-sm">
+                @Html.DisplayNameFor(model => model.RoomPrice)
+            </th>
+            <th class="th-sm">
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th class="th-sm">
+                @Html.DisplayNameFor(model => model.CheckInDate)
+            </th>
+            <th class="th-sm">
+                @Html.DisplayNameFor(model => model.CheckOutDate)
+            </th>
+            <th class="th-sm">
+                @Html.DisplayNameFor(model => model.NumberOfDays)
+            </th>
+            <th class="th-sm">
+                @Html.DisplayNameFor(model => model.NumberOfPeople)
+            </th>
+            <th class="th-sm">
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GuestEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CheckInDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CheckOutDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfDays)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfPeople)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @if (item.Status == "Not yet Checked In!!")
+                    {
+                        <a href="@Url.Action("CheckInn", "Bookings",new { id = item.RoomBookingId })" onclick="return confirm('Are you sure you want to check in this person, click Ok to Confirm, Or Cancel');" rel="tooltip" title="Check In" class="btn btn-success btn-simple btn-xs"><i class="fa fa-check-square-o"></i></a>
+                    }
+                    else if (item.Status == "Checked In")
+                    {
+                        <a href="@Url.Action("CheckOut", "Bookings",new { id = item.RoomBookingId })" onclick="return confirm('Are you sure you want to check out this person, click Ok to Confirm, Or Cancel');" rel="tooltip" title="Check Out" class="btn btn-danger btn-simple btn-xs"><i class="glyphicon glyphicon-remove"></i></a>
+                    }
+                    else if (item.Status == "Checked In")
+                    {
+
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script type="text/javascript">
+    $('#my_list').dataTable(
+        {
+            dom: 'Bfrtip',
+            lengthMenu: [
+                [10, 25, 50, -1],
+                ['10 rows', '25 rows', '50 rows', 'Show all']
+            ],
+            buttons: [
+                'pageLength', 'csv', 'pdf', 'print'
+            ],
+            language: { search: "" },
+            select: true
+        }
+    );
+    $(".dataTables_filter input").addClass("search-input");
+    $(".dataTables_filter input").attr('placeholder', 'Search');
+    $('#my_list')
+        .removeClass('display')
+        .addClass('table table-striped table-hover');</script>*@
+
+
+
+
+
+
+
+@model PrometheusHotel.Models.Booking
+@{
+    ViewBag.Title = "CheckIn";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var Total = 0m;
+}
+
+<section class="content-header">
+    <b><h1>Check In</h1></b>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Main row -->
+    <div class="box box-default">
+
+        <div class="box-header with-border">
+            <h3 class="box-title">Booking Details</h3>
+        </div>
+
+        <div class="box-content">
+            <div class="col-md-12">
+                @*<div class="col-md-12">
+                    <div class="row">
+                        <h6><i class="fa fa-user"></i> Guest</h6>
+                        <dl class="dl-horizontal">
+                            <dt>
+                                Name
+                            </dt>
+                            <dd>
+                                @Model.Name
+                            </dd>
+
+                            <dt>
+                                Surname
+                            </dt>
+                            <dd>
+                                @Model.Surname
+                            </dd>
+
+                            <dt>
+                                Email
+                            </dt>
+                            <dd>
+                                @Model.GuestEmail
+                            </dd>
+
+                            <dt>
+                                Phone
+                            </dt>
+                            <dd>
+                                @Model.Mobile
+                            </dd>
+
+
+                            <dt>
+                                Address
+                            </dt>
+                            <dd>
+                                @Model.Address
+                            </dd>
+
+                        </dl>
+                    </div>
+                </div>*@
+                <div class="col-md-12">
+                    <div class="row">
+                        @*<h6><i class="fa fa-book"></i> Booking Details</h6>*@
+                        <dl class="dl-horizontal">
+                            <dt>
+                                Reference Number
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.RefNum)
+                            </dd>
+
+                            <dt>
+                                Room Type
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.RoomType)
+                            </dd>
+
+                            <dt>
+                                Room Price
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.RoomPrice)
+                            </dd>
+
+
+                            <dt>
+                                Total Price
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Total)
+                            </dd>
+
+                            <dt>
+                                Check In
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.CheckInDate)
+                            </dd>
+
+                            <dt>
+                                Check Out
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.CheckOutDate)
+                            </dd>
+
+                            <dt>
+                                Booking Date
+                            </dt>
+
+                            <dd>
+                                @Model.BookingDate.ToString("dd MMMM yyyy")
+                            </dd>
+
+                            <dt>
+                                Number Of Days
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.NumberOfDays)
+                            </dd>
+
+                            <dt>
+                                Status
+                            </dt>
+                            <b>
+                                <dd>
+                                    @Model.Status
+                                </dd>
+                            </b>
+
+
+                        </dl>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            <a class="btn btn-default col-md-3" href="/bookings/index">
+                <i class="fa fa-arrow-left"></i>
+                Back
+            </a>
+            @if (Model.CheckOut == false)
+            {
+                <a class="btn btn-primary col-md-3 pull-right" href="/Bookings/CheckInn/@Model.RoomBookingId">
+                    <i class="fa fa-thumbs-o-up"></i>
+                    Check In
+                </a>
+            }
+
+            <td>
+                @if (Model.Status == "Not yet Checked In!!")
+                {
+                    <a href="@Url.Action("CheckInn", "Bookings",new { id = Model.RoomBookingId })" onclick="return confirm('Are you sure you want to check in this person, click Ok to Confirm, Or Cancel');" rel="tooltip" title="Check In" class="btn btn-success btn-simple btn-xs"><i class="fa fa-thumbs-o-up"></i></a>
+                }
+                else if (Model.Status == "Checked In")
+                {
+                    <a href="@Url.Action("CheckOut", "Bookings",new { id = Model.RoomBookingId })" onclick="return confirm('Are you sure you want to check out this person, click Ok to Confirm, Or Cancel');" rel="tooltip" title="Check Out" class="btn btn-danger btn-simple btn-xs"><i class="glyphicon glyphicon-remove"></i></a>
+                }
+                else if (Model.Status == "Checked In")
+                {
+
+                }
+            </td>
+
+        </div>
+    </div>
+    <!-- /.row (main row) -->
+</section>

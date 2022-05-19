@@ -1,0 +1,62 @@
+﻿@model HotelSystem.Models.ChatClass
+@{
+    ViewBag.Title = "Chat";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<section class="ad-post bg-gray py-5">
+    <!-- Container Start -->
+    <div class="container">
+        <fieldset class="border border-gary p-4 mb-5">
+            <!-- Row Start -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="heading text-center pb-5">
+                        <h2 class="font-weight-bold" style="text-align:center;color:#dd4b39;font-family:'Bradley Hand ITC'">Response</h2>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="box-body">
+                        <div>
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(model => model.Id)
+                                @Html.HiddenFor(model => model.FirstName)
+                                @Html.HiddenFor(model => model.Time)
+                                @Html.HiddenFor(model => model.Employee)
+                                @Html.HiddenFor(model => model.ChatContent)
+                                @Html.HiddenFor(model => model.ChatStatus)
+                                @Html.HiddenFor(model => model.UserId)
+                                <div class="container col-lg-8">
+                                    <h3>Respond to @Model.FirstName</h3>
+                                    <br />
+                                    <input type="text" name="message" placeholder="Type Message ..." class="form-control" required>
+                                    <br />
+                                    <button type="submit" class="btn btn-outline-success">Send</button>
+                                    <br /><br />
+                                </div>
+
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <!-- Row End -->
+    </div>
+    <!-- Container End -->
+</section>
+
+<section class="popular-deals section bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="trending-ads-slide">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

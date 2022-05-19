@@ -1,0 +1,67 @@
+﻿@model HotelSystem.Models.RoomType
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><b style="color:#dd4b39; text-transform:capitalize;"><i class="fa fa-building"></i> Add room type.</b></h3>
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="container col-lg-6">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control", @required = "required", placeholder = "Room Type*" } })
+                                    @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.NumberOfRooms, new { htmlAttributes = new { @class = "form-control", @required = "required", placeholder = "Number Of Rooms*" } })
+                                    @Html.ValidationMessageFor(model => model.NumberOfRooms, "", new { @class = "text-danger" })
+                                </div>
+                                @*<div class="form-group">
+                                        @Html.EditorFor(model => model.NoOfChildren, new { htmlAttributes = new { @class = "form-control", @required = "required", placeholder = "Number Of Children*" } })
+                                        @Html.ValidationMessageFor(model => model.NoOfChildren, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.EditorFor(model => model.NoOfAdults, new { htmlAttributes = new { @class = "form-control", @required = "required", placeholder = "Number Of Adults*" } })
+                                        @Html.ValidationMessageFor(model => model.NoOfAdults, "", new { @class = "text-danger" })
+                                    </div>*@
+
+                                <div class="box-footer">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn btn-sm btn-primary pull-right col-md-3">
+                                                <i class="fa fa-plus-circle"></i> Add type
+                                            </button>
+                                            <a class="btn btn-sm btn-default col-md-2" href="/Location/Index">
+                                                <i class="fa fa-backward"></i> types
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+    <!-- /.row -->
+</section>
+
+

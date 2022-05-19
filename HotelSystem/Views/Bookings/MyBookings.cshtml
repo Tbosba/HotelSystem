@@ -1,0 +1,202 @@
+﻿@model HotelSystem.Models.Booking
+@{
+    ViewBag.Title = "MyBookings";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    var Total = 0m;
+}
+
+<section class="content-header">
+    <h1>Bookings</h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Bookings</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Main row -->
+    <div class="box box-default">
+
+        <div class="box-header with-border">
+            <h3 class="box-title">Bookings Details</h3>
+        </div>
+
+        <div class="box-content">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="row">
+                        <h6><i class="fa fa-user"></i> Guest</h6>
+                        <dl class="dl-horizontal">
+                            <dt>
+                                Room Description
+                            </dt>
+                            <dd>
+                                @Model.RoomType
+                            </dd>
+
+                            <dt>
+                                Room Type
+                            </dt>
+                            <dd>
+                                @Model.RoomType
+                            </dd>
+
+                            <dt>
+                                Room Price
+                            </dt>
+                            <dd>
+                                @Model.RoomPrice
+                            </dd>
+
+                            <dt>
+                                Check-In Date
+                            </dt>
+                            <dd>
+                                @Model.CheckIn
+                            </dd>
+
+
+                            <dt>
+                                Check-Out Date
+                            </dt>
+                            <dd>
+                                @Model.CheckOutDate
+                            </dd>
+
+                            <dt>
+                                Number Of Days
+                            </dt>
+                            <dd>
+                                @Model.NumberOfDays
+                            </dd>
+
+                            <dt>
+                                Number Of People
+                            </dt>
+                            <dd>
+                                @Model.NumberOfPeople
+                            </dd>
+
+                            <dt>
+                                Status
+                            </dt>
+                            <dd>
+                                @Model.Status
+                            </dd>
+                            <td>
+                                <a class="btn btn-default" onclick="location.href='@Url.Action("GetMyBill","Home", new { id=Model.RoomBookingId})'">View Bill &raquo;</a>
+                            </td>
+                        </dl>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <h6><i class="fa fa-book"></i> Booking Details</h6>
+                        <dl class="dl-horizontal">
+                            <dt>
+                                Reference Number
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.RefNum)
+                            </dd>
+
+                            <dt>
+                                Check In
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.CheckInDate)
+                            </dd>
+
+                            <dt>
+                                Check Out
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.CheckOutDate)
+                            </dd>
+
+                            <dt>
+                                Number Of Days
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.NumberOfDays)
+                            </dd>
+
+                            <dt>
+                                Booking Date
+                            </dt>
+
+                            <dd>
+                                @Model.BookingDate.ToString("dd MMMM yyyy")
+                            </dd>
+
+                            <dt>
+                                Sub-total
+                            </dt>
+
+                            <dd>
+                                R @Model.BasicCost
+                            </dd>
+
+                            <dt>
+                                Tax (15%)
+                            </dt>
+
+                            <dd>
+                                R @Model.Tax
+                            </dd>
+                            <dt>
+                                Total Price
+                            </dt>
+
+                            <dd>
+                                R @Html.DisplayFor(model => model.Total)
+                            </dd>
+
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            <a class="btn btn-default col-md-3" href="/bookings/index">
+                <i class="fa fa-arrow-left"></i>
+                Back
+            </a>
+            @if (Model.CheckOut == false)
+            {
+                <a class="btn btn-primary col-md-3 pull-right" href="/bookings/invoice/@Model.RoomBookingId">
+                    <i class="fa fa-envelope-o"></i>
+                    View invoice
+                </a>
+            }
+        </div>
+    </div>
+    <!-- /.row (main row) -->
+</section>
+
+
+<script type="text/javascript">
+    $('#my_list').dataTable(
+        {
+            dom: 'Bfrtip',
+            lengthMenu: [
+                [10, 25, 50, -1],
+                ['10 rows', '25 rows', '50 rows', 'Show all']
+            ],
+            buttons: [
+                'pageLength', 'csv', 'pdf', 'print'
+            ],
+            language: { search: "" },
+            select: true
+        }
+    );
+    $(".dataTables_filter input").addClass("search-input");
+    $(".dataTables_filter input").attr('placeholder', 'Search');
+    $('#my_list')
+        .removeClass('display')
+        .addClass('table table-striped table-hover');</script>

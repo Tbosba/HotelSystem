@@ -1,0 +1,79 @@
+﻿@model IEnumerable<HotelSystem.Models.BillHistory>
+
+@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<section class="ad-post bg-gray py-5">
+    <div class="container">
+        <fieldset class="border border-gary p-4 mb-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="title text-center">My Bill History</h2>
+                    <table style="width:90%"  class="table table-striped table-bordered table-hover">
+                        <tr>
+                            <th style="background-color:#5bc0de;color:white">
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th style="background-color:#5bc0de;color:white">
+                                @Html.DisplayNameFor(model => model.Surname)
+                            </th>
+                            <th style="background-color:#5bc0de;color:white">
+                                @Html.DisplayNameFor(model => model.RegNo)
+                            </th>
+                            <th style="background-color:#5bc0de;color:white">
+                                @Html.DisplayNameFor(model => model.Email)
+                            </th>
+                            <th style="background-color:#5bc0de;color:white">
+                                @Html.DisplayNameFor(model => model.Address)
+                            </th>
+                            <th style="background-color:#5bc0de;color:white">
+                                @Html.DisplayNameFor(model => model.BookingTotal)
+                            </th>
+                            <th style="background-color:#5bc0de;color:white">
+                                @Html.DisplayNameFor(model => model.TotalAmount)
+                            </th>
+                            <th style="background-color:#5bc0de;color:white">
+                                @Html.DisplayNameFor(model => model.Status)
+                            </th>
+
+                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Surname)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RegNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Address)
+                                </td>
+                                <td>
+                                    R @Html.DisplayFor(modelItem => item.BookingTotal)
+                                </td>
+                                <td>
+                                    <b> R @Html.DisplayFor(modelItem => item.TotalAmount)</b>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+
+                            </tr>
+                            <a class="btn btn-outline-primary pull-right" onclick="print()"><i class="fa fa-print"></i> Print</a>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</section>
+

@@ -1,0 +1,120 @@
+﻿@model IEnumerable<HotelSystem.Models.Booking>
+
+@{
+    ViewBag.Title = "Bookings";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<table class="table">
+    <tr>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.RoomType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GuestEmail)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.RoomPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BasicCost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Total)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.DepositAmt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepositPaid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RefNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CheckInDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CheckOutDate)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.BookingDate)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfDays)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfPeople)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GuestEmail)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BasicCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.DepositAmt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepositPaid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RefNum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckInDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckOutDate)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingDate)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfDays)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfPeople)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.RoomBookingId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.RoomBookingId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.RoomBookingId })
+            </td>
+        </tr>
+    }
+
+</table>

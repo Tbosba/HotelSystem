@@ -1,0 +1,141 @@
+﻿@model HotelSystem.Models.Booking
+@using HotelSystem.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    var message = TempData["AlertMessage"] ?? string.Empty;
+
+    IEnumerable<Booking> RoomBookings = ViewData["RoomBookings"] as IEnumerable<Booking>;
+
+    ViewBag.Id = "";
+}
+<script>
+    var msg = '@message';
+    if (msg)
+        alert(msg);
+</script>
+<section class="ad-post bg-gray py-5">
+    <div class="container col-md-8">
+        <fieldset class="border border-gary p-4 mb-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="alert alert-info" align="center">My Booking(s)</h2>
+
+                    @if (RoomBookings.Count() == 0)
+                    {
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-warning">
+                                    <b>Note :</b> No bookings available at the moment.
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        foreach (var item in RoomBookings)
+                        {
+                            <div class="panel panel-default">
+                                <div class="panel-heading alert alert-info">
+                                    <h3 class="panel-title pull-right"><b style="color:#dd4b39; text-transform:capitalize;"> Booking No. @Html.DisplayFor(modelItem => item.RoomBookingId)  </b></h3><span class="panel-title"><h3 class="panel-title"> @Html.DisplayFor(modelItem => item.Name)  @Html.DisplayFor(modelItem => item.Surname)</h3></span>
+                                </div><hr />
+                                <div class="panel-body">
+
+                                    <div class="row">
+                                        <div class="container col-md-12">
+                                            <table class="table">
+                                                <tr>
+                                                    <h5 class="alert alert-info"><b>Booking @Html.DisplayFor(modelItem => item.RefNum) (@Html.DisplayFor(modelItem => item.RoomBookingId)) </b> <span class="pull-right">@Html.DisplayFor(modelItem => item.Status)</span></h5>
+                                                    <hr />
+                                                    <div class="col-md-12">
+                                                        <div>
+
+                                                            <span class="pull-right">
+                                                                <a class="btn btn-outline-info" onclick="location.href='@Url.Action("BookingDetails", "Bookings", new { id = item.RoomBookingId })'">View Booking &raquo;</a>
+                                                            </span><br />
+                                                        </div><br />
+                                                        <div>
+
+                                                            <span class="pull-right">
+                                                                <a style="color:wheat" class="btn btn-outline-danger" onclick="location.href='@Url.Action("ExtendStay", "Bookings", new { id = item.RoomBookingId })'">Extend Stay &raquo;</a>
+                                                            </span><br />
+                                                        </div><br />
+                                                        <div>
+
+                                                            <span class="pull-right">
+                                                                <a class="btn btn-outline-success" onclick="location.href='@Url.Action("SendEmailToCheckIn", "Bookings", new { id = item.RoomBookingId })'">CheckIn Booking &raquo;</a>
+                                                            </span><br />
+                                                        </div><br />
+                                                        <div>
+
+                                                            <span class="pull-left">
+                                                                <a style="color:wheat;" class="btn btn-outline-secondary" onclick="location.href='@Url.Action("SendEmailToCheckOut", "Bookings", new { id = item.RoomBookingId })'">CheckOut Booking &raquo;</a>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</section>
+<form action="/bookings/SendCheckInEmail" methord="post" a id="chechingin">
+    <div class="modal fade" id="checkin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <h2 class="text-center">Enter Reference Number to Check In</h2>
+                <div class="modal-body">
+
+                    <div class="form-group col-md-12">
+                        <input type="text" class="form-control my-2 my-lg-1" id="RefN" name="RefN" placeholder="Enter Reference Number">
+                    </div>
+
+                </div>
+                <div class="modal-footer border-top-0 mb-3 mx-5 justify-content-lg-between justify-content-center">
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                    <input type="submit" value="Check in" class="btn btn-outline-success" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<form action="/bookings/SendCheckOutEmail" methord="get" id="chechingout">
+    <div class="modal fade" id="checkout" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <h2 class="text-center">Enter Reference Number to Check Out</h2>
+                <div class="modal-body">
+
+                    <div class="form-group col-md-12">
+                        <input type="text" class="form-control my-2 my-lg-1" id="RefN" name="RefN" placeholder="Enter Reference Number">
+                    </div>
+
+                </div>
+                <div class="modal-footer border-top-0 mb-3 mx-5 justify-content-lg-between justify-content-center">
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                    <input type="submit" value="Check out" class="btn btn-outline-success" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
